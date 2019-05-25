@@ -4,6 +4,7 @@ define(PUBLIC_FOLDER, 'public');
 define(CATEGORIES_FOLDER, PUBLIC_FOLDER.'/categories');
 define(PRODUCTS_FOLDER, PUBLIC_FOLDER.'/products');
 define(CONTROLLER_FOLDER, 'controllers');
+define(MODELS_FOLDER, 'models');
 define(DEFAULT_CONTROLLER, 'home');
 
 

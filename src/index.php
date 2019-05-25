@@ -37,9 +37,16 @@ function global_middleware($context, $args)
 	$GLOBALS['total_cart'] = array_sum(array_column($products, 'totalprice'));
 }
 
-function next_mid($args)
+function next_mid($context, $args)
 {
-	
+	if (is_callable($context['function']))
+	{
+		call_user_func($context['function'], $args);
+		if ($GLOBALS['sql_connection'])
+			mysqli_close($GLOBALS['sql_connection']);
+	}
+	else
+		echo "404";
 }
 
 if (user_getusers() == FALSE)
@@ -72,32 +79,19 @@ if (file_exists(CONTROLLER_FOLDER.'/'.$controller.'.php'))
 	$function = $origial_args[1];
 	if (!isset($origial_args[1]))
 		$function = 'index';
+	if (substr($function, 0, 1) === '_')
+	{
+		echo "404";
+		return;
+	}
 	array_shift($args);
 	$globals['context']['function'] = $function;
 	global_middleware($globals['context'], $args);
-	if (is_callable('middleware') && !call_user_func('middleware', $globals['context'], $args, function() {
-		if (is_callable($function))
-		{
-			$GLOBALS = array_merge($GLOBALS, $globals);
-			call_user_func($function, $args);
-			if ($GLOBALS['sql_connection'])
-				mysqli_close($GLOBALS['sql_connection']);
-		}
-		else
-			echo "404";
-	}));
+	$GLOBALS = array_merge($GLOBALS, $globals);
+	if (is_callable('middleware') && !call_user_func('middleware', $globals['context'], $args, next_mid))
+		return ;
 	else if (!is_callable('middleware'))
-	{
-		if (is_callable($function))
-		{
-			$GLOBALS = array_merge($GLOBALS, $globals);
-			call_user_func($function, $args);
-			if ($GLOBALS['sql_connection'])
-				mysqli_close($GLOBALS['sql_connection']);
-		}
-		else
-			echo "404";
-	}
+		next_mid($globals['context'], $args);
 }
 else
 {

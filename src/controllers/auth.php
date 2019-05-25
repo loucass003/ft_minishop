@@ -4,7 +4,6 @@ include_once "models/auth.php";
 
 function login($args)
 {
-	
 	if ($_POST['submit'] == 'Connexion')
 	{
 		if ($user = do_auth($_POST['login'], $_POST['passwd']))

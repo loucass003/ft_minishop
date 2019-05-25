@@ -5,10 +5,13 @@ include_once "models/categories.php";
 include_once "models/product.php";
 include_once "models/order.php";
 
-function middleware($context, $args)
+function middleware($context, $args, $next)
 {
 	if (isset($_SESSION['user']) && $_SESSION['user']['rank'] == 'admin')
+	{
+		$next($context, $args);
 		return TRUE;
+	}
 	echo "Refused Access";
 	return (FALSE);
 }

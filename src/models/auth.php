@@ -25,6 +25,8 @@ function do_auth($login, $passwd)
 
 function do_register($login, $passwd, $rank = 'user')
 {
+	if (!isset($login) || !isset($passwd))
+		return (FALSE);
 	$con = connect();
 	$query = "INSERT INTO users (login, passwd, `rank`) VALUES (?, ?, ?)";
 	if ($stmt = mysqli_prepare($con, $query))
