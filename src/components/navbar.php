@@ -31,7 +31,7 @@
 	<?php endif; ?>
 	<div class="right">
 		<div class="list" style="width: auto">
-			<a class="label" style="width: auto" href="/home/cart" >Cart (<?= count($_SESSION['cart']) ?> - <?= $GLOBALS['total_cart'] ?>€)</a>
+			<a class="label" style="width: auto" href="/home/cart" ><img id="cart" src="/public/icons/cart.png" alt="cart"> (<?= count($_SESSION['cart']) ?> - <?= $GLOBALS['total_cart'] ?>€)</a>
 		</div>
 		<?php if ($_SESSION['user']) : ?>
 		<div class="list">
