@@ -46,7 +46,7 @@ function next_mid($context, $args)
 			mysqli_close($GLOBALS['sql_connection']);
 	}
 	else
-		echo "404";
+		error('Not Found');
 }
 
 if (user_getusers() == FALSE)

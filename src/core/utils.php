@@ -12,4 +12,14 @@ function redirect($url)
 	header('Location: '.$url);
 }
 
+function error($message)
+{
+	$error = $message;
+	$url = "http://api.giphy.com/v1/gifs/search?q=".rawurlencode($error)."&api_key=lznPpSaqOm8sO14729EOPRcjLmGLxh4w&limit=20";
+	$data = json_decode(file_get_contents($url), true);
+	$id = random_int(0, $data['pagination']['count']);
+	$image = $data['data'][$id]['images']['original']['url'];
+	include "views/error.php";
+}
+
 ?>
