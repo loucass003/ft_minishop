@@ -39,8 +39,8 @@
 		</table>
 		<p>TOTAL : <?= $total ?>€</p>
 		<form action="/home/cart" method="post">
-			<input type="submit" name="submitorder" value="submit" style="width: 48%">
-			<input type="submit" name="cancelcart" value="cancel" style="width: 48%; float right; right: 0; display: inline">
+			<input type="submit" name="submitorder" value="comfirm my order" style="width: 48%">
+			<input type="submit" name="cancelcart" value="clear my cart" style="width: 48%; float right; right: 0; display: inline">
 		</form>
 	</div>
 </div>
