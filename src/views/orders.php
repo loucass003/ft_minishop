@@ -8,9 +8,10 @@
 			<thead>
 				<tr>
 					<th>ORDER ID</th>
-					<th>NAME</th>
+					<th>LOGIN</th>
 					<th>DATE</th>
-					<th>TOTAL AMOUT</th>
+					<th>TOTAL AMOUNT</th>
+					<th>VIEW</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -20,6 +21,7 @@
 					<td><?= $order['login'] ?></td>
 					<td><?= date("Y/m/d H:i",$order['date'])?></td>
 					<td>€<?= $order_sum[$order['id']] ?></td>
+					<td><div class="btn"><a href="order_details.php">DETAILS</a></div></td>
 				</tr>
 			<?php endforeach; ?>
 			</tbody>
