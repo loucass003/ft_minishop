@@ -6,6 +6,9 @@
 	</div>
 	<?php if ($GLOBALS['context']['controller'] != 'admin') : ?>
 	<div class="list">
+		<a class="label" href="/home/categories">Categories</a>
+	</div>
+	<div class="list">
 		<a class="label" href="/home/products">Products</a>
 	</div>
 	<div class="list">

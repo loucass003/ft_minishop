@@ -10,6 +10,11 @@ function index($args)
 	$categories = categories_getcategories();
 	include "views/index.php";
 }
+function categories()
+{
+	$categories = categories_getcategories();
+	include "views/categories.php";
+}
 
 function products($args)
 {
