@@ -98,4 +98,24 @@ function product_delproduct($id)
 	return FALSE;
 }
 
+function product_searchproducts($name)
+{
+	$con = connect();
+	$query = "SELECT * FROM products WHERE `name` LIKE ?";
+	$products = [];
+	if ($stmt = mysqli_prepare($con, $query))
+	{
+		$name = '%'.$name.'%';
+		mysqli_stmt_bind_param($stmt, "s", $name);
+		if (@mysqli_stmt_execute($stmt) == FALSE || mysqli_stmt_errno($stmt) !== 0)
+			return [];
+		$result = mysqli_stmt_get_result($stmt);
+		while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+			$products[] = $row;
+		mysqli_free_result($result);
+		mysqli_stmt_close($stmt);
+	}
+	return $products;
+}
+
 ?>

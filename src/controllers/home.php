@@ -22,7 +22,7 @@ function category($args)
 {
 	if ($args[0] == '' || ($category = categories_getcategory($args[0])) === FALSE)
 	{
-		echo "404";
+		error('Not Found');
 		return ;
 	}
 	$products = categories_getproducts($category['id']);
@@ -86,6 +86,18 @@ function cart($args)
 	$total = array_sum(array_column($products, 'totalprice'));
 	$GLOBALS['total_cart'] = $total;
 	include "views/cart.php";
+}
+
+function search($args)
+{
+	$products = product_getproducts();
+	$search = isset($_POST['search']) ? $_POST['text'] : rawurldecode($args[0]);
+	if (isset($search) || isset($_POST['search']))
+	{
+		if (($products = product_searchproducts($search)) == FALSE)
+			$error = "Unable to search";
+	}
+	include "views/search.php";
 }
 
 ?>

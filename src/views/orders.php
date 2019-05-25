@@ -19,7 +19,7 @@
 					<td><?= $order['id'] ?></td>
 					<td><?= $order['login'] ?></td>
 					<td><?= date("Y/m/d H:i",$order['date'])?></td>
-					<td>€<?= $order_sum[$order['id'] - 1] ?></td>
+					<td>€<?= $order_sum[$order['id']] ?></td>
 				</tr>
 			<?php endforeach; ?>
 			</tbody>

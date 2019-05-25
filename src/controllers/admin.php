@@ -12,7 +12,7 @@ function middleware($context, $args, $next)
 		$next($context, $args);
 		return TRUE;
 	}
-	echo "Refused Access";
+	error("Refused Access", 'You shall not pass');
 	return (FALSE);
 }
 
@@ -125,7 +125,7 @@ function category($args)
 {
 	if ($args[0] == '' || ($category = categories_getcategory($args[0])) === FALSE)
 	{
-		echo "404";
+		error('Not Found');
 		return ;
 	}
 
@@ -163,7 +163,7 @@ function order($args)
 {
 	if ($args[0] == '' || ($products = order_getproducts($args[0])) === FALSE)
 	{
-		echo "404";
+		error('Not Found');
 		return ;
 	}
 

@@ -81,7 +81,7 @@ if (file_exists(CONTROLLER_FOLDER.'/'.$controller.'.php'))
 		$function = 'index';
 	if (substr($function, 0, 1) === '_')
 	{
-		echo "404";
+		error('Not Found');
 		return;
 	}
 	array_shift($args);
@@ -97,6 +97,6 @@ else
 {
 	if ($controller == 'public')
 		return FALSE;
-	echo "404";
+	error('Not Found');
 }
 ?>

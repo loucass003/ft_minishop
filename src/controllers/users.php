@@ -6,7 +6,7 @@ function middleware($context, $args, $next)
 {
 	if (!isset($_SESSION['user']))
 	{
-		echo "You need to be connected";
+		error('You need to be connected');
 		return (FALSE);
 	}
 	$next($context, $args);
@@ -21,7 +21,7 @@ function orders()
 	{
 		$products = order_getproducts($order['id']);
 		foreach ($products as $product)
-			$order_sum[$key] += $product['price'] * $product['amount'];
+			$order_sum[$order['id']] += $product['price'] * $product['amount'];
 	}
 	include "views/orders.php";
 }

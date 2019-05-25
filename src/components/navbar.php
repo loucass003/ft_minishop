@@ -1,14 +1,17 @@
 <div class="navbar">
 	
-	<?php if ($GLOBALS['context']['controller'] != 'admin') : ?>
 	<div class="title">FT<b>MINISHOP</b></div>
 	<div class="list">
 		<a class="label" href="/home">Home</a>
 	</div>
+	<?php if ($GLOBALS['context']['controller'] != 'admin') : ?>
 	<div class="list">
 		<a class="label" href="/home/products">Products</a>
 	</div>
-	<?php else : ?>
+	<div class="list">
+		<a class="label" href="/home/search">Search</a>
+	</div>
+	<?php elseif ($_SESSION['user']['rank'] == 'admin') : ?>
 	<div class="title">FT<b>MINISHOP - ADMIN</b></div>
 	<div class="list">
 		<a class="label" href="/admin">Users</a>
