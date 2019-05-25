@@ -27,9 +27,10 @@ function order_getorder($user_id)
 	$orders = [];
 	if ($stmt = mysqli_prepare($con, $query))
 	{
-		mysqli_stmt_bind_param($stmt, "i", $id);
-		if (@mysqli_stmt_execute($stmt) == FALSE || mysqli_stmt_errno($stmt) !== 0)
+		mysqli_stmt_bind_param($stmt, "i", $user_id);
+		if (mysqli_stmt_execute($stmt) == FALSE || mysqli_stmt_errno($stmt) !== 0)
 			return [];
+
 		$result = mysqli_stmt_get_result($stmt);
 		while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 			$orders[] = $row;

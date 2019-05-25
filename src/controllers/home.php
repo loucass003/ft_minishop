@@ -7,7 +7,6 @@ include_once "models/order.php";
 function index($args)
 {
 	$GLOBALS['title'] = "HOME";
-
 	$categories = categories_getcategories();
 	include "views/index.php";
 }
@@ -19,9 +18,9 @@ function products($args)
 	include "views/products.php";
 }
 
-function toto($args)
+function test()
 {
-	echo "TOTO";
+	echo "lol";
 }
 
 function category($args)
@@ -37,7 +36,7 @@ function category($args)
 
 function cart($args)
 {
-	if ($_POST['cancelcart'] == 'cancel')
+	if ($_POST['cancelcart'] == 'clear my cart')
 	{
 		$_SESSION['cart'] = [];
 	}
@@ -53,7 +52,7 @@ function cart($args)
 				$_SESSION['cart'][$_POST['id']] = NULL;
 		}
 	}
-	else if ($_POST['submitorder'] == 'submit')
+	else if ($_POST['submitorder'] == 'comfirm my order')
 	{
 		if (isset($_SESSION['user']))
 		{

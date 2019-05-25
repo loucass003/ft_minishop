@@ -1,6 +1,10 @@
 <?php
 
+<<<<<<< Updated upstream
 function functions()
+=======
+function middleware($context, $args, $next)
+>>>>>>> Stashed changes
 {
 	$functions = array(
 		'auth/do_auth' => [ 'rank' => 'invite' ],
