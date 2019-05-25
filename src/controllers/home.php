@@ -56,7 +56,9 @@ function cart($args)
 	{
 		if (isset($_SESSION['user']))
 		{
-			if (($order_id = order_addorder($_SESSION['user']['id'])) === FALSE)
+			if (count($_SESSION['cart']) == 0)
+				$error = "Empty cart";
+			if (!$error && ($order_id = order_addorder($_SESSION['user']['id'])) === FALSE)
 				$error = "Unable to create order";
 			if (!isset($error))
 			{
@@ -69,7 +71,7 @@ function cart($args)
 					}
 				}
 				$_SESSION['cart'] = [];
-				redirect('/home');
+				redirect('/users/orders');
 				return ;
 			}
 		}

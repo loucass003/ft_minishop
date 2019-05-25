@@ -15,14 +15,14 @@ function middleware($context, $args, $next)
 
 function orders()
 {
-    $orders = order_getorder($_SESSION['user']['id']);
-    $order_sum = [];
-    foreach($orders as $key => $order)
-    {
-        $products = order_getproducts($order['id']);
-        foreach ($products as $product)
-            $order_sum[$key] += $product['price'] * $product['amount'];
-    }
+	$orders = order_getorder($_SESSION['user']['id']);
+	$order_sum = [];
+	foreach($orders as $key => $order)
+	{
+		$products = order_getproducts($order['id']);
+		foreach ($products as $product)
+			$order_sum[$key] += $product['price'] * $product['amount'];
+	}
 	include "views/orders.php";
 }
 ?>
