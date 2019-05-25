@@ -21,7 +21,7 @@
 					<td><?= $order['login'] ?></td>
 					<td><?= date("Y/m/d H:i",$order['date'])?></td>
 					<td>€<?= $order_sum[$order['id']] ?></td>
-					<td><div class="btn"><a href="order_details.php">DETAILS</a></div></td>
+					<td><div class="btn"><a href="/users/order/<?= $order[id]?>">DETAILS</a></div></td>
 				</tr>
 			<?php endforeach; ?>
 			</tbody>

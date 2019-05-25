@@ -25,4 +25,13 @@ function orders()
 	}
 	include "views/orders.php";
 }
+
+function order($args)
+{
+	$id = $args[0];
+	$products = order_getproducts($id);
+	foreach ($products as $product)
+			$order_sum[$id] += $product['price'] * $product['amount'];
+	include "views/order_details.php";
+}
 ?>
