@@ -23,6 +23,11 @@ function products($args)
 	include "views/products.php";
 }
 
+function toto()
+{
+	echo "lol";
+}
+
 function category($args)
 {
 	if ($args[0] == '' || ($category = categories_getcategory($args[0])) === FALSE)

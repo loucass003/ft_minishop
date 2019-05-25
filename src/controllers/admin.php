@@ -12,7 +12,7 @@ function middleware($context, $args, $next)
 		$next($context, $args);
 		return TRUE;
 	}
-	error("Refused Access", 'You shall not pass');
+	error("Refused Access", 'NOPE');
 	return (FALSE);
 }
 
