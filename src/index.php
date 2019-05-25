@@ -37,6 +37,11 @@ function global_middleware($context, $args)
 	$GLOBALS['total_cart'] = array_sum(array_column($products, 'totalprice'));
 }
 
+function next_mid($args)
+{
+	
+}
+
 if (user_getusers() == FALSE)
 {
 	echo "You need to install the database";
@@ -69,22 +74,30 @@ if (file_exists(CONTROLLER_FOLDER.'/'.$controller.'.php'))
 		$function = 'index';
 	array_shift($args);
 	$globals['context']['function'] = $function;
-	if (is_callable($function))
-	{
-		global_middleware($globals['context'], $args);
-		if (is_callable('middleware') && !call_user_func('middleware', $globals['context'], $args))
+	global_middleware($globals['context'], $args);
+	if (is_callable('middleware') && !call_user_func('middleware', $globals['context'], $args, function() {
+		if (is_callable($function))
 		{
-			echo "Refused access";
-			return ;
+			$GLOBALS = array_merge($GLOBALS, $globals);
+			call_user_func($function, $args);
+			if ($GLOBALS['sql_connection'])
+				mysqli_close($GLOBALS['sql_connection']);
 		}
-
-		$GLOBALS = array_merge($GLOBALS, $globals);
-		call_user_func($function, $args);
-		if ($GLOBALS['sql_connection'])
-			mysqli_close($GLOBALS['sql_connection']);
+		else
+			echo "404";
+	}));
+	else if (!is_callable('middleware'))
+	{
+		if (is_callable($function))
+		{
+			$GLOBALS = array_merge($GLOBALS, $globals);
+			call_user_func($function, $args);
+			if ($GLOBALS['sql_connection'])
+				mysqli_close($GLOBALS['sql_connection']);
+		}
+		else
+			echo "404";
 	}
-	else
-		echo "404";
 }
 else
 {

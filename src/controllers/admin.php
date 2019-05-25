@@ -9,7 +9,8 @@ function middleware($context, $args)
 {
 	if (isset($_SESSION['user']) && $_SESSION['user']['rank'] == 'admin')
 		return TRUE;
-	return FALSE;
+	echo "Refused Access";
+	return (FALSE);
 }
 
 function index($args)
