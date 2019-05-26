@@ -41,23 +41,21 @@ function modif_pwd()
 {
 	if ($_POST['submit'] == 'Comfirm')
 	{
-		if (!$_POST['login'] || !$_POST['oldpasswd'] || !$_POST['confirm'] || !$_POST['newpasswd'])
+		if (!$_POST['oldpasswd'] || !$_POST['confirm'] || !$_POST['newpasswd'])
 			$error = "Un des champs est vide !";
-		if ($_POST['newpasswd'] != $_POST['confirm'])
+		if (!isset($error) && $_POST['newpasswd'] != $_POST['confirm'])
 			$error = "Les mots de passe ne correspondent pas !";
-		if ($user = do_auth($_POST['login'], $_POST['oldpasswd']))
+		$hash = hash('whirlpool', $_POST['newpasswd']);
+		if (!isset($error) && $hash === $_SESSION['user']['passwd'])
+			$error = "Old and new password are the same";
+		if(!isset($error) && do_modif_pwd($_SESSION['user']['id'], $hash) === FALSE)
+			$error = "Unable to update the user";
+		if (!isset($error))
 		{
-			if($modif = do_modif_pwd($_POST['login'], $_POST['oldpasswd'], $_POST['newpasswd']))
-			{
-				$_SESSION['user'] = NULL;
-				message('Your password has changed!', 'Return to login', '/auth/login');
-				return ;
-			}
-			else
-				$error = "FAILED";
+			$_SESSION['user'] = NULL;
+			message('Your password has changed!', 'Return to login', '/auth/login');
+			return ;
 		}
-		else
-			$error = "Wrong old password!";
 	}
 	$GLOBALS['title'] = "HOME";
 	include "views/auth/modif_pwd.php";

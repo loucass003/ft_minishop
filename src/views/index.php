@@ -12,9 +12,11 @@
 	<div id="slide-right" class="slide-btn"></div>
 </div>
 
+
 <div class="index-container">
-	<div style="position: relative;" class="box">
+	<div style="position: relative; min-height: 200px" class="box">
 		<h1>LAST BOUGHT PRODUCTS</h1>
+		<?php if (count($products) !== 0) : ?>
 		<div class="slide-cards" id="slide-cards">
 			<?php foreach ($products as $product) : ?>
 				<?php include "components/product-card.php" ?>
@@ -22,8 +24,12 @@
 		</div>
 		<div id="slide-left-cards" class="slide-btn" onClick="document.querySelector('#slide-cards').scrollBy({left:-250, top:0, behavior: 'smooth'})"></div>
 		<div id="slide-right-cards" class="slide-btn" onClick="document.querySelector('#slide-cards').scrollBy({left:250, top:0, behavior: 'smooth'})"></div>
+		<?php else : ?>
+			<h3 align="center">Nothing to show</h3>
+		<?php endif; ?>
 	</div>
 </div>
+
 
 <style>
 
@@ -38,6 +44,7 @@
 }
 
 .slide-cards {
+	min-height: 200px;
 	position: relative;
 	overflow-x: scroll;
 	overflow-y: hidden;

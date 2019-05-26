@@ -5,7 +5,7 @@ include_once "core/mysql.php";
 function do_auth($login, $passwd)
 {
 	$con = connect();
-	$query = "SELECT id, login, rank FROM users WHERE login=? AND passwd=?";
+	$query = "SELECT id, login, rank, passwd FROM users WHERE login=? AND passwd=?";
 	if ($stmt = mysqli_prepare($con, $query))
 	{
 		$hash = hash('whirlpool', $passwd);
@@ -43,21 +43,19 @@ function do_register($login, $passwd, $rank = 'user')
 		return FALSE;
 }
 
-function do_modif_pwd($login, $oldpasswd, $newpasswd)
+function do_modif_pwd($id, $newhash)
 {
-	if (!isset($login) || !isset($newpasswd))
-		return (FALSE);
+	print_r($id);
 	$con = connect();
-	$query = "UPDATE users SET `passwd` = ? WHERE `login` = ?";
+	$query = "UPDATE users SET `passwd` = ? WHERE `id` = ?";
 	if($stmt = mysqli_prepare($con, $query))
 	{
-		$hash = hash('whirlpool', $newpasswd);
-		mysqli_stmt_bind_param($stmt, "ss", $hash, $login);
-		if (@mysqli_stmt_execute($stmt) == FALSE || mysqli_stmt_errno($stmt) !== 0)
-			return FALSE;
+		mysqli_stmt_bind_param($stmt, "si", $newhash, $id);
+		if (mysqli_stmt_execute($stmt) == FALSE || mysqli_stmt_errno($stmt) !== 0)
+			return (FALSE);
 		$result = mysqli_stmt_get_result($stmt);
 		mysqli_stmt_close($stmt);
-			return TRUE;
+		return (TRUE);
 	}
 	else
 		return FALSE;

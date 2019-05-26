@@ -37,8 +37,8 @@ cp caddy.service /etc/systemd/system/
 chown root:root /etc/systemd/system/caddy.service
 chmod 644 /etc/systemd/system/caddy.service
 systemctl daemon-reload
-systemctl start php7.0-fpm.service
-systemctl start caddy.service
+systemctl restart php7.0-fpm.service
+systemctl restart caddy.service
 systemctl enable php7.0-fpm.service
 systemctl enable caddy.service
 

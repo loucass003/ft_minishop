@@ -42,7 +42,7 @@ function categories_getcategory($id)
 function categories_getproducts($id)
 {
 	$con = connect();
-	$query = "SELECT `id`, `name`, `price` FROM product_link INNER JOIN products ON products.id = product_link.product_id WHERE `category_id` = ?;";
+	$query = "SELECT `id`, `name`, `price`, `stock` FROM product_link INNER JOIN products ON products.id = product_link.product_id WHERE `category_id` = ?;";
 	$products = [];
 	if ($stmt = mysqli_prepare($con, $query))
 	{
