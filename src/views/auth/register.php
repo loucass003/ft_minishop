@@ -8,7 +8,7 @@
 		<h1 class="error">Error: <?= $error ?></h1>
 		<?php endif; ?>
 		<div class="box login">
-			<h1>Instcription</h1>
+			<h1>Inscription</h1>
 			<form action="/auth/register" method="post">
 				<p><input type="text" placeholder="login" name="login" required></p>
 				<p><input type="password" placeholder="passwd" name="passwd" required></p>
