@@ -66,7 +66,8 @@ function order_addorder($user_id)
 	$query = "INSERT INTO orders (user, `date`) VALUES (?, ?)";
 	if ($stmt = mysqli_prepare($con, $query))
 	{
-		mysqli_stmt_bind_param($stmt, "ii", $user_id, time());
+		$time = time();
+		mysqli_stmt_bind_param($stmt, "ii", $user_id, $time);
 		if (@mysqli_stmt_execute($stmt) == FALSE || mysqli_stmt_errno($stmt) !== 0)
 			return FALSE;
 		$result = mysqli_stmt_get_result($stmt);
@@ -149,7 +150,7 @@ function order_delorder($order_id)
 	{
 		mysqli_stmt_bind_param($stmt, "i", $order_id);
 		if (@mysqli_stmt_execute($stmt) == FALSE || mysqli_stmt_errno($stmt) !== 0)
-			return FALSE;;
+			return FALSE;
 		return order_clearlinkedproducts($order_id);
 	}
 	return FALSE;

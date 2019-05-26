@@ -63,21 +63,27 @@ function cart($args)
 		{
 			if (count($_SESSION['cart']) == 0)
 				$error = "Empty cart";
-			if (!$error && ($order_id = order_addorder($_SESSION['user']['id'])) === FALSE)
+				
+			if (!isset($error) && ($order_id = order_addorder($_SESSION['user']['id'])) === FALSE)
 				$error = "Unable to create order";
+				echo "hum?";
 			if (!isset($error))
 			{
 				foreach ($_SESSION['cart'] as $id => $p)
 				{
-					if (order_linkproduct($order_id, $id, $p) === FALSE)
+					if (isset($p) && order_linkproduct($order_id, $id, $p) === FALSE)
 					{
 						$error = "Unable to link a product to an order";
-						return;
+						break;
 					}
 				}
-				$_SESSION['cart'] = [];
-				redirect('/users/orders');
-				return ;
+				if (!isset($error))
+				{
+					$_SESSION['cart'] = [];
+					redirect('/users/orders');
+					echo "hum?";
+					return ;
+				}
 			}
 		}
 		else
