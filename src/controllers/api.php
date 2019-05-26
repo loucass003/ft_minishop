@@ -45,6 +45,7 @@ function middleware($context, $args, $next)
 		$func = $args[0];
 		if (!is_callable($func))
 			return _continue($next);
+		header('Content-Type: application/json');
 		if (!isset($functions[$model.'/'.$func]) || !has_rank($functions[$model.'/'.$func]['rank']))
 		{
 			echo json_encode(['error' => 'invalid permission']);

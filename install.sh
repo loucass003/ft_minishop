@@ -6,25 +6,39 @@
 #    By: llelievr <llelievr@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/31 15:20:55 by llelievr          #+#    #+#              #
-#    Updated: 2019/03/31 16:38:41 by llelievr         ###   ########.fr        #
+#    Updated: 2019/05/26 13:59:50 by llelievr         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 apt-get update
-apt-get install -y apache2
-apt-get install -y php7.0 php7.0-mysql php7.0-zip php7.0-mbstring php7.0-json
+apt-get install -y php7.0 php7.0-mysql php7.0-zip php7.0-mbstring php7.0-json php7.0-fpm
 apt-get install -y mysql-server
 mysql < /git/configs/default-user.sql
 apt-get install -y curl vim htop unzip
-if ! [ -L /var/www ]; then
-	rm -rf /var/www
-	ln -fs /git/src /var/www
-fi
-rm -r /etc/apache2/sites-available
-mkdir /etc/apache2/sites-available
-cp /git/configs/apache-config.conf /etc/apache2/sites-available/
-cat /git/configs/envs >> /etc/apache2/envvars
-a2enmod rewrite
-a2ensite apache-config.conf
-a2dissite 000-default.conf
-service apache2 restart
+
+curl --silent https://getcaddy.com | bash -s personal
+chown root:root /usr/local/bin/caddy
+chmod 755 /usr/local/bin/caddy
+
+mkdir /etc/caddy
+ln -s /git/configs/Caddyfile /etc/caddy/Caddyfile
+chown -R root:root /etc/caddy
+chmod 644 /etc/caddy/Caddyfile
+
+mkdir /etc/ssl/caddy
+chown -R root:www-data /etc/ssl/caddy
+chmod 0770 /etc/ssl/caddy
+
+chown -R www-data:www-data /git/src
+chmod 555 /git/src
+
+wget -q https://raw.githubusercontent.com/mholt/caddy/master/dist/init/linux-systemd/caddy.service
+cp caddy.service /etc/systemd/system/
+chown root:root /etc/systemd/system/caddy.service
+chmod 644 /etc/systemd/system/caddy.service
+systemctl daemon-reload
+systemctl start php7.0-fpm.service
+systemctl start caddy.service
+systemctl enable php7.0-fpm.service
+systemctl enable caddy.service
+

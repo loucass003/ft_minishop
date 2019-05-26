@@ -1,0 +1,12 @@
+localhost:8100 {
+        root /git/src
+        gzip
+        log stdout
+        errors stderr
+        fastcgi / /run/php/php7.0-fpm.sock php
+        rewrite {
+            r .*
+            ext /
+            to /index.php?{query}
+        }
+}

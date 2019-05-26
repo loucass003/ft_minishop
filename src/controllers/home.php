@@ -105,7 +105,7 @@ function search($args)
 	if (isset($search) || isset($_POST['search']))
 	{
 		if (($products = product_searchproducts($search)) == FALSE)
-			$error = "Unable to search";
+			$products = [];
 	}
 	include "views/search.php";
 }
