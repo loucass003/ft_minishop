@@ -41,16 +41,16 @@ create table products
         unique (id)
 );
 CREATE UNIQUE INDEX products_id_uindex ON ft_minishop.products (id);
-INSERT INTO ft_minishop.products (id, name, price) VALUES (1, 'dde-jesu', 1000000);
-INSERT INTO ft_minishop.products (id, name, price) VALUES (2, 'extincteur', 35);
-INSERT INTO ft_minishop.products (id, name, price) VALUES (3, 'Pchit Pchit', 3.9);
-INSERT INTO ft_minishop.products (id, name, price) VALUES (4, 'Hello Nicolas', 500);
-INSERT INTO ft_minishop.products (id, name, price) VALUES (5, 'Chaise (Sale)', 50);
-INSERT INTO ft_minishop.products (id, name, price) VALUES (6, 'Poubelle', 25.5);
-INSERT INTO ft_minishop.products (id, name, price) VALUES (7, 'Clavier Apple', 25);
-INSERT INTO ft_minishop.products (id, name, price) VALUES (8, 'OBEY', 500.05);
-INSERT INTO ft_minishop.products (id, name, price) VALUES (9, 'Souris appeul (Un peu usee)', 0.01);
-INSERT INTO ft_minishop.products (id, name, price) VALUES (10, 'Tapis de souris', 15);
+INSERT INTO ft_minishop.products (id, name, price, stock) VALUES (1, 'dde-jesu', 1000000, 1);
+INSERT INTO ft_minishop.products (id, name, price, stock) VALUES (2, 'extincteur', 35, 6);
+INSERT INTO ft_minishop.products (id, name, price, stock) VALUES (3, 'Pchit Pchit', 3.9, 18);
+INSERT INTO ft_minishop.products (id, name, price, stock) VALUES (4, 'Hello Nicolas', 500, 3);
+INSERT INTO ft_minishop.products (id, name, price, stock) VALUES (5, 'Chaise (Sale)', 50, 900);
+INSERT INTO ft_minishop.products (id, name, price, stock) VALUES (6, 'Poubelle', 25.5, 18);
+INSERT INTO ft_minishop.products (id, name, price, stock) VALUES (7, 'Clavier Apple', 25, 950);
+INSERT INTO ft_minishop.products (id, name, price, stock) VALUES (8, 'OBEY', 500.05, 3);
+INSERT INTO ft_minishop.products (id, name, price, stock) VALUES (9, 'Souris appeul (Un peu usee)', 0.01, 300);
+INSERT INTO ft_minishop.products (id, name, price, stock) VALUES (10, 'Tapis de souris', 15, 900);
 CREATE TABLE ft_minishop.users
 (
     id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
