@@ -49,7 +49,7 @@ function cart($args)
 			if ($_SESSION['cart'][$_POST['id']] > 0)
 				$_SESSION['cart'][$_POST['id']]--;
 			if ($_SESSION['cart'][$_POST['id']] == 0)
-				$_SESSION['cart'][$_POST['id']] = NULL;
+				unset($_SESSION['cart'][$_POST['id']]);
 		}
 	}
 	else if ($_POST['submitorder'] == 'comfirm my order')
@@ -58,7 +58,6 @@ function cart($args)
 		{
 			if (count($_SESSION['cart']) == 0)
 				$error = "Empty cart";
-				
 			if (!isset($error) && ($order_id = order_addorder($_SESSION['user']['id'])) === FALSE)
 				$error = "Unable to create order";
 			if (!isset($error))
@@ -88,7 +87,6 @@ function cart($args)
 				{
 					$_SESSION['cart'] = [];
 					redirect('/users/orders');
-					echo "hum?";
 					return ;
 				}
 			}
