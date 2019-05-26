@@ -63,4 +63,15 @@ function do_modif_pwd($login, $oldpasswd, $newpasswd)
 		return FALSE;
 }
 
+function check_captcha($reponse)
+{
+	echo $reponse;	
+	$post = ['secret' => '6LdBjaUUAAAAALpcN4q29m6RKZSBm1dpaX_hh6sD', 'response' => $reponse];
+	$ch = curl_init('https://www.google.com/recaptcha/api/siteverify');
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	$result = json_decode(curl_exec($ch), true);
+	return ($result['success'] == TRUE);
+}
+
 ?>

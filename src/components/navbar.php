@@ -37,7 +37,7 @@
 			<div class="label"><?= $_SESSION['user']['login'] ?></div>
 			<div class="elements">
 				<a href="/users/orders">My orders</a>
-				<a href="/auth/modif_pwd">Change Password</a>
+				<a href="/users/modif_pwd">Change Password</a>
 				<a href="/auth/logout">Deconnexion</a>
 				<?php if ($_SESSION['user']['rank'] == 'admin') : ?>
 				<a href="/admin">Admin</a>
