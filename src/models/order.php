@@ -85,7 +85,7 @@ function order_linkproduct($order_id, $product_id, $amount)
 	if ($stmt = mysqli_prepare($con, $query))
 	{
 		mysqli_stmt_bind_param($stmt, "iii", $order_id, $product_id, $amount);
-		if (@mysqli_stmt_execute($stmt) == FALSE || mysqli_stmt_errno($stmt) !== 0)
+		if (mysqli_stmt_execute($stmt) == FALSE || mysqli_stmt_errno($stmt) !== 0)
 			return FALSE;
 		$result = mysqli_stmt_get_result($stmt);
 		mysqli_stmt_close($stmt);

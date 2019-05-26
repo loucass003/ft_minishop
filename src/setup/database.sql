@@ -31,11 +31,14 @@ INSERT INTO ft_minishop.product_link (product_id, category_id) VALUES (10, 1);
 INSERT INTO ft_minishop.product_link (product_id, category_id) VALUES (4, 2);
 INSERT INTO ft_minishop.product_link (product_id, category_id) VALUES (8, 2);
 INSERT INTO ft_minishop.product_link (product_id, category_id) VALUES (1, 3);
-CREATE TABLE ft_minishop.products
+create table products
 (
-    id float PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    name varchar(100) NOT NULL,
-    price float NOT NULL
+    id    float auto_increment,
+    name  varchar(100) not null,
+    price float        not null,
+    stock int          not null,
+    constraint products_id_uindex
+        unique (id)
 );
 CREATE UNIQUE INDEX products_id_uindex ON ft_minishop.products (id);
 INSERT INTO ft_minishop.products (id, name, price) VALUES (1, 'dde-jesu', 1000000);

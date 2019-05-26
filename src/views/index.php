@@ -12,6 +12,41 @@
 	<div id="slide-right" class="slide-btn"></div>
 </div>
 
+<div class="index-container">
+	<div style="position: relative;" class="box">
+		<h1>LAST BOUGHT PRODUCTS</h1>
+		<div class="slide-cards" id="slide-cards">
+			<?php foreach ($products as $product) : ?>
+				<?php include "components/product-card.php" ?>
+			<?php endforeach; ?>
+		</div>
+		<div id="slide-left-cards" class="slide-btn" onClick="document.querySelector('#slide-cards').scrollBy({left:-250, top:0, behavior: 'smooth'})"></div>
+		<div id="slide-right-cards" class="slide-btn" onClick="document.querySelector('#slide-cards').scrollBy({left:250, top:0, behavior: 'smooth'})"></div>
+	</div>
+</div>
+
+<style>
+
+.index-container {
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+.slide-cards .product {
+	display: inline-block;
+	white-space: normal;
+}
+
+.slide-cards {
+	position: relative;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	white-space: nowrap;
+	width: 100%;
+}
+
+</style>
+
 <script>
 	const container = document.getElementById('container_slides');
 	const slides = Array.from(container.getElementsByClassName('slides'));
@@ -41,6 +76,9 @@
 		});
 	}
 	redraw();
+
+
+
 </script>
 
 <?php include "components/footer.php"; ?>

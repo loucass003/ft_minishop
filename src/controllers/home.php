@@ -7,7 +7,7 @@ include_once "models/order.php";
 function index($args)
 {
 	$GLOBALS['title'] = "HOME";
-	$categories = categories_getcategories();
+	$products = product_getlastbuyproducts();
 	include "views/index.php";
 }
 function categories()
@@ -61,16 +61,28 @@ function cart($args)
 				
 			if (!isset($error) && ($order_id = order_addorder($_SESSION['user']['id'])) === FALSE)
 				$error = "Unable to create order";
-				echo "hum?";
 			if (!isset($error))
 			{
 				foreach ($_SESSION['cart'] as $id => $p)
 				{
-					if (isset($p) && order_linkproduct($order_id, $id, $p) === FALSE)
+					if (!isset($p))
+						continue ;
+					if (($product = product_getproduct($id)) === FALSE)
+					{
+						$error = "Unable to get product";
+						break;
+					}
+					if (order_linkproduct($order_id, $id, $p) === FALSE)
 					{
 						$error = "Unable to link a product to an order";
 						break;
 					}
+					if ($product['stock'] - $p < 0)
+					{
+						$error = "the product ".$id." is out of stock (need $p but ".$product['stock']." available)";
+						break;
+					}
+					product_editproduct($product['id'], '', '', $product['stock'] - $p);
 				}
 				if (!isset($error))
 				{

@@ -15,9 +15,9 @@ function global_middleware($context, $args)
 {
 	if ($_POST['addcart'] == 'Add')
 	{
-		$amount = $_POST['amount'];
 		if (!isset($_POST['id']))
 			return ;
+		$amount = $_POST['amount'];
 		if (!isset($_POST['amount']) || $amount <= 0)
 			$amount = 1;
 		if ($_SESSION['cart'][$_POST['id']] > 0)

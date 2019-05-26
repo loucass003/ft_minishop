@@ -14,6 +14,7 @@
 					<th>ID</th>
 					<th>Name</th>
 					<th>Price</th>
+					<th>Stock</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -24,15 +25,28 @@
 					<td>
 						<form action="/admin/products" method="post">
 							<input type="hidden" name="id" value="<?= $product['id'] ?>">
+							<input type="hidden" name="stock" value="<?= $product['stock'] ?>">
+							<input type="hidden" name="price" value="<?= $product['price'] ?>">
 							<input type="text" name="name" value="<?= $product['name'] ?>" style="width: 73%">
 							<button type="submit" name="editproduct" value="name" style="width: 25%">Modify</button>
 						</form>
 					</td>
 					<td>
 						<form action="/admin/products" method="post">
+							<input type="hidden" name="stock" value="<?= $product['stock'] ?>">
+							<input type="hidden" name="name" value="<?= $product['name'] ?>">
 							<input type="hidden" name="id" value="<?= $product['id'] ?>">
 							<input type="number" step="any" name="price" value="<?= $product['price'] ?>" style="width: 73%">
 							<button type="submit" name="editproduct" value="price" style="width: 25%">Modify</button>
+						</form>
+					</td>
+					<td>
+						<form action="/admin/products" method="post">
+							<input type="hidden" name="price" value="<?= $product['price'] ?>">
+							<input type="hidden" name="name" value="<?= $product['name'] ?>">
+							<input type="hidden" name="id" value="<?= $product['id'] ?>">
+							<input type="number" min="0" step="1" name="stock" value="<?= $product['stock'] ?>" style="width: 73%">
+							<button type="submit" name="editproduct" value="stock" style="width: 25%">Modify</button>
 						</form>
 					</td>
 					<td align="right">

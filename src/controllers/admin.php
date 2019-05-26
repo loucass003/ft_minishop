@@ -72,7 +72,7 @@ function products($args)
 	{
 		if (!isset($_POST['id']))
 			$error = "invalid product id";
-		if (!isset($error) && product_editproduct($_POST['id'], $_POST['name'], $_POST['price']) === FALSE)
+		if (!isset($error) && product_editproduct($_POST['id'], $_POST['name'], $_POST['price'], $_POST['stock']) === FALSE)
 			$error = "Unable to edit product";
 	}
 	else if ($_POST['delproduct'] == 'delete')
