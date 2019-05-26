@@ -1,6 +1,6 @@
 <div class="navbar">
 	
-	<div class="title">FT<b>MINISHOP</b></div>
+	<div class="title">FT<b>MINISHOP  <?= (GLOBALS['context']['controller'] == 'admin' ? '- ADMIN' : '') ?></b></div>
 	<div class="list">
 		<a class="label" href="/home">Home</a>
 	</div>
@@ -15,7 +15,6 @@
 		<a class="label" href="/home/search">Search</a>
 	</div>
 	<?php elseif ($_SESSION['user']['rank'] == 'admin') : ?>
-	<div class="title">FT<b>MINISHOP - ADMIN</b></div>
 	<div class="list">
 		<a class="label" href="/admin">Users</a>
 	</div>

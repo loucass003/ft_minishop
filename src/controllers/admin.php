@@ -171,6 +171,8 @@ function order($args)
 	{
 		if (!isset($_POST['id']) || order_unlinkproduct($args[0], $_POST['id']) === FALSE)
 			$error = "Unabble to delete product ".$_POST['id']." from order !";
+		else
+			$products = order_getproducts($args[0]);
 	}
 
 	$order_id = $args[0];
