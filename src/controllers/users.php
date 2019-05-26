@@ -1,6 +1,7 @@
 <?php
 
 include_once "models/order.php";
+include_once "models/auth.php";
 
 function middleware($context, $args, $next)
 {
@@ -23,6 +24,7 @@ function orders()
 		foreach ($products as $product)
 			$order_sum[$order['id']] += $product['price'] * $product['amount'];
 	}
+	rsort($orders);
 	include "views/orders.php";
 }
 
@@ -34,4 +36,5 @@ function order($args)
 			$order_sum[$id] += $product['price'] * $product['amount'];
 	include "views/order_details.php";
 }
+
 ?>

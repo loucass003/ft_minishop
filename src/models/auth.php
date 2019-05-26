@@ -43,4 +43,24 @@ function do_register($login, $passwd, $rank = 'user')
 		return FALSE;
 }
 
+function do_modif_pwd($login, $oldpasswd, $newpasswd)
+{
+	if (!isset($login) || !isset($newpasswd))
+		return (FALSE);
+	$con = connect();
+	$query = "UPDATE users SET `passwd` = ? WHERE `login` = ?";
+	if($stmt = mysqli_prepare($con, $query))
+	{
+		$hash = hash('whirlpool', $newpasswd);
+		mysqli_stmt_bind_param($stmt, "ss", $hash, $login);
+		if (@mysqli_stmt_execute($stmt) == FALSE || mysqli_stmt_errno($stmt) !== 0)
+			return FALSE;
+		$result = mysqli_stmt_get_result($stmt);
+		mysqli_stmt_close($stmt);
+			return TRUE;
+	}
+	else
+		return FALSE;
+}
+
 ?>

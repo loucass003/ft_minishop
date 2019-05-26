@@ -30,13 +30,14 @@
 	<?php endif; ?>
 	<div class="right">
 		<div class="list" style="width: auto">
-			<a class="label" style="width: auto" href="/home/cart" ><img id="cart" src="/public/icons/cart.png" alt="cart"> (<?= count($_SESSION['cart']) ?> - <?= $GLOBALS['total_cart'] ?>€)</a>
+			<a class="label" style="width: auto" href="/home/cart" >Cart (<?= count($_SESSION['cart']) ?> Items - € <?= $GLOBALS['total_cart'] ?>)</a>
 		</div>
 		<?php if ($_SESSION['user']) : ?>
 		<div class="list">
 			<div class="label"><?= $_SESSION['user']['login'] ?></div>
 			<div class="elements">
 				<a href="/users/orders">My orders</a>
+				<a href="/auth/modif_pwd">Change Password</a>
 				<a href="/auth/logout">Deconnexion</a>
 				<?php if ($_SESSION['user']['rank'] == 'admin') : ?>
 				<a href="/admin">Admin</a>

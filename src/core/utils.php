@@ -23,4 +23,9 @@ function error($message, $keyword = NULL)
 	include "views/error.php";
 }
 
+function message($message, $button_text, $link)
+{
+	include "views/message.php";
+}
+
 ?>

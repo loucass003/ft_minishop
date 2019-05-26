@@ -103,7 +103,9 @@ th {
 	height: 50px;
 	line-height: 50px;
 	transition: background-color 0.2s;
-	
+}
+.elements{
+	z-index: 1000;
 }
 
 .list .elements a:hover {
@@ -144,13 +146,6 @@ th {
 	height: 55px;
 
 	min-width: 100px;
-}
-
-#cart {
-	position: relative;
-	margin: auto;
-	height: 42px;
-	width: 42px;
 }
 
 /************************************************/
